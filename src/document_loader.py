@@ -74,10 +74,8 @@ class DocumentLoader:
 
         loader = self.build_loader(file_paths)
 
-        print(loader)
-
         docs: List[LangChainDocument] = loader.load()
-       
+
         print(f"Loaded {len(docs)} documents from {folder_path}")
         # print(docs[0])
 
@@ -97,8 +95,8 @@ class DocumentLoader:
                     metadata=metadata
                 )
             )
-            print(f"Processed document {i+1}/{len(docs)}: {file_name} with doc_id {stable_id}")
-            print(f"docs_with_metadata: {docs_with_metadata}")
+            if (i + 1) % 25 == 0 or (i + 1) == len(docs):
+                print(f"Processed {i+1}/{len(docs)} documents")
             
 
         return docs_with_metadata
@@ -107,10 +105,10 @@ class DocumentLoader:
         
         
 
-docling_config = DoclingLoadConfig(allow_external_plugins=True)
-docloader = DocumentLoader(docling_config)
-
-docloader.load_folder("data")
+if __name__ == "__main__":
+    docling_config = DoclingLoadConfig(allow_external_plugins=True)
+    docloader = DocumentLoader(docling_config)
+    docloader.load_folder("data")
 
 
 

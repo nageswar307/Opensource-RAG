@@ -1,3 +1,6 @@
 dotenv
 langchain-docling
 langchain-core
+langchain-ollama
+psycopg[binary]
+pgvector
